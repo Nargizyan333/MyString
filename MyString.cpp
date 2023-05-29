@@ -86,3 +86,36 @@ void MyString::setBuf(const std::string &rhs) {
         mBuf[i] = rhs[i];
     }
 }
+
+char MyString::operator[](int index) const {
+    return mBuf[index];
+}
+
+std::ostream& operator<<(std::ostream &os, const MyString &mStr) {
+    os << mStr.getBuf();
+    return os;
+}
+
+std::ofstream& operator<<(std::ofstream& ofs, const MyString& mStr) {
+    for (int i = 0; i < mStr.getSize(); ++i) {
+        ofs << mStr[i];
+    }
+    return ofs;
+}
+
+std::string operator+(std::string& str, const MyString& mStr) {
+    std::string tmp = str;
+    for (int i = 0; i < mStr.getSize(); ++i) {
+        tmp.push_back(mStr[i]);
+    }
+    return tmp;
+}
+
+char* operator+(char* cPtr, const MyString& mStr) {
+    std::size_t size1 = strlen(cPtr);
+    std::size_t size2 = strlen(mStr.getBuf());
+    char* result = new char[size1 + size2 + 1];
+    strcpy(result, cPtr);
+    strcat(result, mStr.getBuf());
+    return result;
+}

@@ -23,6 +23,12 @@ public:
     char* getBuf() const;
     void setBuf(const char* rhs);
     void setBuf(const std::string& rhs);
+    char operator[](int index) const;
 };
+
+std::ostream& operator<<(std::ostream& os, const MyString& mStr);
+std::ofstream& operator<<(std::ofstream& ofs, const MyString& mStr);
+std::string operator+(std::string& str, const MyString& mStr);
+char* operator+(char* cPtr, const MyString& mStr);
 
 #endif
